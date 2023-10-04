@@ -6,6 +6,16 @@ PhoneBook::PhoneBook()
 	this->last_contact = 0;
 }
 
+void PhoneBook::displayContacts()
+{
+	int i = 0;
+	while (i <= this->last_contact)
+	{
+		std::cout << "|" + this->contacts_list[i].getFirstName() + "|" << std::endl;
+		i++;
+	}
+}
+
 void PhoneBook::addContact(const Contact c)
 {
 	int	i;
@@ -28,3 +38,4 @@ void PhoneBook::addContact(const Contact c)
 		this->last_contact = i;
 	}
 }
+
