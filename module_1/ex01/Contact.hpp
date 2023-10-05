@@ -21,6 +21,12 @@ class Contact
 			const std::string secret);
 
 	std::string getFirstName(void);
+	std::string getLastName(void);
+	std::string getNickname(void);
+	std::string getPhoneNumber(void);
+	std::string getDarkestSecret(void);
 };
+
+std::ostream& operator<<(std::ostream& out, Contact& obj);
 
 #endif

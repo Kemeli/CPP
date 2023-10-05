@@ -14,6 +14,7 @@ class PhoneBook
 	PhoneBook();
 	void addContact(Contact c);
 	void displayContacts();
+	void printIndex(std::string index);
 	int	last_contact;
 };
 

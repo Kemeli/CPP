@@ -4,6 +4,7 @@
 int	main(void)
 {
 	std::string	action;
+	std::string	index;
 	PhoneBook	agenda;
 	std::string	first_n;
 	std::string	last_n;
@@ -33,6 +34,9 @@ int	main(void)
 		else if (action == "SEARCH")
 		{
 			agenda.displayContacts();
+			std::cout << "Enter index: ";
+			std::cin >> index;
+			agenda.printIndex(index);
 		}
 		else if (action == "EXIT")
 			std::cout << "you chose " + action;
