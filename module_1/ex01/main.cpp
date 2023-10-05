@@ -15,32 +15,52 @@ int	main(void)
 	while (1)
 	{
 		std::cout << "Choose an action: ADD, SEARCH, EXIT: ";
-		std::cin >> action;
+		std::getline(std::cin, action);
 
 		if (action == "ADD")
 		{
-			std::cout << "Enter firt name: ";
-			std::cin >> first_n;
-			std::cout << "Enter last name: ";
-			std::cin >> last_n;
-			std::cout << "Enter nickname: ";
-			std::cin >> nick_n;
-			std::cout << "Enter phone_number: ";
-			std::cin >> phone_num;
-			std::cout << "Enter darkest_secret: ";
-			std::cin >> darkest_secret;
+			while (first_n.empty()){
+				std::cout << "Enter firt name: ";
+				std::getline(std::cin, first_n);
+			}
+			while (last_n.empty()){
+				std::cout << "Enter last name: ";
+				std::getline(std::cin, last_n);
+			}
+			while (nick_n.empty()){
+				std::cout << "Enter nickname: ";
+				std::getline(std::cin, nick_n);
+			}
+			while (phone_num.empty()){
+				std::cout << "Enter phone_number: ";
+				std::getline(std::cin, phone_num);
+			}
+			while (darkest_secret.empty()){
+				std::cout << "Enter darkest_secret: ";
+				std::getline(std::cin, darkest_secret);
+			}
 			agenda.addContact(Contact(first_n, last_n, nick_n, phone_num, darkest_secret));
+			if (std::cin.eof()==1) {
+				return (0);
+			}
+			first_n.clear();
+			last_n.clear();
+			nick_n.clear();
+			phone_num.clear();
+			darkest_secret.clear();
 		}
 		else if (action == "SEARCH")
 		{
 			agenda.displayContacts();
 			std::cout << "Enter index: ";
-			std::cin >> index;
+			std::getline(std::cin, index);
 			agenda.printIndex(index);
 		}
 		else if (action == "EXIT")
-			std::cout << "you chose " + action;
-		else
-			std::cout << "Invalid action, run the program again" << std::endl;
+			return (0);
+		if (std::cin.eof()==1) {
+			std::cout << "\n";
+			return (0);
+		}
 	}
 }
