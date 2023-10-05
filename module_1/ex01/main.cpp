@@ -7,7 +7,7 @@ void	add(PhoneBook &agenda)
 	std::string	last_n;
 	std::string	nick_n;
 	std::string	phone_num;
-	std::string	darkest_secret;
+	std::string	dark_secret;
 
 	while (first_n.empty()){
 		std::cout << "Enter firt name: ";
@@ -25,11 +25,11 @@ void	add(PhoneBook &agenda)
 		std::cout << "Enter phone_number: ";
 		std::getline(std::cin, phone_num);
 	}
-	while (darkest_secret.empty()){
+	while (dark_secret.empty()){
 		std::cout << "Enter darkest_secret: ";
-		std::getline(std::cin, darkest_secret);
+		std::getline(std::cin, dark_secret);
 	}
-	agenda.addContact(Contact(first_n, last_n, nick_n, phone_num, darkest_secret));
+	agenda.addContact(Contact(first_n, last_n, nick_n, phone_num, dark_secret));
 	if (std::cin.eof()==1) {
 		return ;
 	}
@@ -37,13 +37,22 @@ void	add(PhoneBook &agenda)
 	last_n.clear();
 	nick_n.clear();
 	phone_num.clear();
-	darkest_secret.clear();
+	dark_secret.clear();
+}
+
+void	search(PhoneBook &agenda)
+{
+	std::string	index;
+
+	agenda.displayContacts();
+	std::cout << "Enter index: ";
+	std::getline(std::cin, index);
+	agenda.printIndex(index);
 }
 
 int	main(void)
 {
 	std::string	action;
-	std::string	index;
 	PhoneBook	agenda;
 
 	while (1)
@@ -54,12 +63,7 @@ int	main(void)
 		if (action == "ADD")
 			add(agenda);
 		else if (action == "SEARCH")
-		{
-			agenda.displayContacts();
-			std::cout << "Enter index: ";
-			std::getline(std::cin, index);
-			agenda.printIndex(index);
-		}
+			search(agenda);
 		else if (action == "EXIT")
 			return (0);
 		if (std::cin.eof()==1) {
