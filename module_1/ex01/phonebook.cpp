@@ -3,12 +3,12 @@
 
 PhoneBook::PhoneBook()
 {
-	this->last_contact = 0;
+	this->index = 0;
 }
 
-void	getContacts(std::string str)
+void	printContacts(std::string str)
 {
-	if (str.length() > 9)
+	if (str.length() > 10)
 		std::cout << str.substr(0, 9) << ".|";
 	else
 		std::cout << std::setw(10) << str << "|";
@@ -34,7 +34,7 @@ void	PhoneBook::printIndex(std::string index)
 	int	i;
 
 	i = cpp_atoi(index);
-	if (i > this->last_contact)
+	if (i > this->index)
 	{
 		std::cout << "Invalid index" << std::endl;
 		return ;
@@ -44,13 +44,13 @@ void	PhoneBook::printIndex(std::string index)
 
 void PhoneBook::displayContacts()
 {
-	int i = 0; //index precisa ser 1 talvez
-	while (i <= this->last_contact)
+	int i = 0;
+	while (this->contacts_list[i].getFirstName() != "" && i < 8)
 	{
 		std::cout << "|" << std::setw(10) <<  i << "|";
-		getContacts(this->contacts_list[i].getFirstName());
-		getContacts(this->contacts_list[i].getLastName());
-		getContacts(this->contacts_list[i].getNickname());
+		printContacts(this->contacts_list[i].getFirstName());
+		printContacts(this->contacts_list[i].getLastName());
+		printContacts(this->contacts_list[i].getNickname());
 		std::cout << "\n";
 		i++;
 	}
@@ -58,23 +58,9 @@ void PhoneBook::displayContacts()
 
 void PhoneBook::addContact(const Contact c)
 {
-	int	i;
-
-	i = 0;
-	while (i < 8)
-	{
-		if (this->contacts_list[i].getFirstName() == "") //se a posição atual estiver vazia
-		{
-			this->contacts_list[i] = c;
-			this->last_contact = i;
-			break ;
-		}
-		i++;
-	}
-	if (i == 8)
-	{
-		i = this->last_contact + 1;
-		this->contacts_list[i] = c;
-		this->last_contact = i;
-	}
+	if (this->index == 8)
+		this->index = 0;
+	std::cout << this->index << std::endl;
+	this->contacts_list[this->index] = c;
+	this->index++;
 }

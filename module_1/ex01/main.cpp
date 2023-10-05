@@ -10,7 +10,7 @@ void	add(PhoneBook &agenda)
 	std::string	dark_secret;
 
 	while (first_n.empty() && !std::cin.eof()){
-		std::cout << "Enter firt name: ";
+		std::cout << "Enter first name: ";
 		std::getline(std::cin, first_n);
 	}
 	while (last_n.empty() && !std::cin.eof()){
@@ -46,11 +46,12 @@ void	search(PhoneBook &agenda)
 	agenda.displayContacts();
 	while (index.empty())
 	{
-		std::cout << "Enter index: ";
 		if (std::cin.eof())
 			return ;
+		std::cout << "Enter index: ";
 		std::getline(std::cin, index);
 	}
+	std::cout << "\n";
 	agenda.printIndex(index);
 }
 
