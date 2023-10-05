@@ -44,8 +44,13 @@ void	search(PhoneBook &agenda)
 	std::string	index;
 
 	agenda.displayContacts();
-	std::cout << "Enter index: ";
-	std::getline(std::cin, index);
+	while (index.empty())
+	{
+		std::cout << "Enter index: ";
+		if (std::cin.eof())
+			return ;
+		std::getline(std::cin, index);
+	}
 	agenda.printIndex(index);
 }
 
@@ -65,7 +70,7 @@ int	main(void)
 			search(agenda);
 		else if (action == "EXIT")
 			return (0);
-		if (std::cin.eof()==1) {
+		if (std::cin.eof()) {
 			std::cout << "\n";
 			return (0);
 		}

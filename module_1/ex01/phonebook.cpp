@@ -8,9 +8,10 @@ PhoneBook::PhoneBook()
 
 void	getContacts(std::string str)
 {
-	while (str.length() < 9)
-		str = " " + str;
-	std::cout << str << "|";
+	if (str.length() > 9)
+		std::cout << str.substr(0, 9) << ".|";
+	else
+		std::cout << std::setw(10) << str << "|";
 }
 
 int	cpp_atoi(std::string str)
@@ -46,7 +47,7 @@ void PhoneBook::displayContacts()
 	int i = 0; //index precisa ser 1 talvez
 	while (i <= this->last_contact)
 	{
-		std::cout << "|         " << i << "|";
+		std::cout << "|" << std::setw(10) <<  i << "|";
 		getContacts(this->contacts_list[i].getFirstName());
 		getContacts(this->contacts_list[i].getLastName());
 		getContacts(this->contacts_list[i].getNickname());
