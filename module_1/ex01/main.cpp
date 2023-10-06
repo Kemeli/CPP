@@ -39,21 +39,6 @@ void	add(PhoneBook &agenda)
 	dark_secret.clear();
 }
 
-void	search(PhoneBook &agenda)
-{
-	std::string	index;
-
-	agenda.displayContacts();
-	while (index.empty())
-	{
-		if (std::cin.eof())
-			return ;
-		std::cout << "Enter index: ";
-		std::getline(std::cin, index);
-		agenda.printIndex(index);
-	}
-}
-
 int	main(void)
 {
 	std::string	action;
@@ -67,7 +52,7 @@ int	main(void)
 		if (action == "ADD")
 			add(agenda);
 		else if (action == "SEARCH")
-			search(agenda);
+			agenda.search(agenda);
 		else if (action == "EXIT")
 			return (0);
 		if (std::cin.eof()) {

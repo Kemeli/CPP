@@ -29,15 +29,26 @@ int	cpp_atoi(std::string str)
 	return (n);
 }
 
-void	PhoneBook::printIndex(std::string index)
+void	PhoneBook::search(PhoneBook &agenda)
 {
-	int	i;
+	std::string	index;
+	int			i;
 
-	i = cpp_atoi(index);
-	if (i < 0 || i > 7 || this->contacts_list[i].getFirstName().empty())
+	agenda.displayContacts();
+	while (index.empty())
 	{
-		std::cout << "Invalid index" << std::endl;
-		return ;
+		if (std::cin.eof())
+			return ;
+		std::cout << "Enter index: ";
+		std::getline(std::cin, index);
+		if (!index.empty())
+		{
+			i = cpp_atoi(index);
+			if (i < 0 || i > 7 || this->contacts_list[i].getFirstName().empty()){
+				std::cout << "Invalid index" << std::endl;
+				index.clear();
+			}
+		}
 	}
 	std::cout << this->contacts_list[i] << std::endl;
 }

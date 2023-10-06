@@ -16,7 +16,7 @@ class PhoneBook
 	PhoneBook();
 	void addContact(Contact c);
 	void displayContacts();
-	void printIndex(std::string index);
+	void search(PhoneBook &agenda);
 };
 
 #endif
