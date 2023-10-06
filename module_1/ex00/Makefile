@@ -9,3 +9,5 @@ clean:
 fclean: clean
 	rm -rf megaphone
 re: fclean all
+
+.Phony: all clean fclean re
