@@ -45,7 +45,7 @@ void	PhoneBook::printIndex(std::string index)
 void PhoneBook::displayContacts()
 {
 	int i = 0;
-	while (this->contacts_list[i].getFirstName() != "" && i < 8)
+	while (i < 8 && !this->contacts_list[i].getFirstName().empty())
 	{
 		std::cout << "|" << std::setw(10) <<  i << "|";
 		printContacts(this->contacts_list[i].getFirstName());
