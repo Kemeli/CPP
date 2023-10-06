@@ -17,7 +17,7 @@ int	main(void)
 		else if (action == "EXIT")
 			return (0);
 		if (std::cin.eof()) {
-			std::cout << "\n";
+			std::cout << std::endl;
 			return (0);
 		}
 	}
