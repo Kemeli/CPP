@@ -6,10 +6,7 @@ int	main(int argc, char **argv)
 	int	j;
 
 	if (argc == 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
 
 	for (i = 1; i < argc; i++)
 	{
@@ -18,4 +15,5 @@ int	main(int argc, char **argv)
 		std::cout << " ";
 	}
 	std::cout << std::endl;
+	return (0);
 }
