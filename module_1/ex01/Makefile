@@ -4,7 +4,7 @@ NAME = phonebook
 
 all: $(NAME)
 
-OBJECTS = main.o phonebook.o contact.o
+OBJECTS = main.o PhoneBook.o Contact.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
@@ -17,3 +17,5 @@ clean:
 fclean: clean
 	rm -rf phonebook
 re: fclean all
+
+.Phony: all clean fclean re
