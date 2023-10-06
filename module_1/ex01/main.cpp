@@ -50,9 +50,8 @@ void	search(PhoneBook &agenda)
 			return ;
 		std::cout << "Enter index: ";
 		std::getline(std::cin, index);
+		agenda.printIndex(index);
 	}
-	std::cout << "\n";
-	agenda.printIndex(index);
 }
 
 int	main(void)

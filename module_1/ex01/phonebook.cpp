@@ -34,7 +34,7 @@ void	PhoneBook::printIndex(std::string index)
 	int	i;
 
 	i = cpp_atoi(index);
-	if (i > this->index)
+	if (i < 0 || i > 7 || this->contacts_list[i].getFirstName().empty())
 	{
 		std::cout << "Invalid index" << std::endl;
 		return ;
