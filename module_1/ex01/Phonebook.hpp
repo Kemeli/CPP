@@ -9,14 +9,18 @@
 class PhoneBook
 {
 	private:
-	Contact contacts_list[8]; //7?
-	int	index;
+	Contact	contacts_list[8]; //7?
+	int		index;
 
 	public:
 	PhoneBook();
-	void addContact(Contact c);
-	void displayContacts();
-	void search(PhoneBook &agenda);
+	void	addContact(Contact c);
+	void	displayContacts();
+	void	search(PhoneBook &agenda);
 };
+
+void	add(PhoneBook &agenda);
+int		cpp_atoi(std::string str);
+void	printContacts(std::string str);
 
 #endif

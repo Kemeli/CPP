@@ -4,7 +4,7 @@ NAME = phonebook
 
 all: $(NAME)
 
-OBJECTS = main.o PhoneBook.o Contact.o
+OBJECTS = main.o PhoneBook.o Contact.o add.o utils.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
