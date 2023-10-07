@@ -5,7 +5,7 @@ int	main(void)
 	std::string	action;
 	PhoneBook	agenda;
 
-	while (1)
+	while (action != "EXIT")
 	{
 		std::cout << "Choose an action: ADD, SEARCH, EXIT:" << std::endl ;
 		std::getline(std::cin, action);
@@ -14,8 +14,6 @@ int	main(void)
 			add(agenda);
 		else if (action == "SEARCH")
 			agenda.search(agenda);
-		else if (action == "EXIT")
-			return (0);
 		if (std::cin.eof()) {
 			std::cout << std::endl;
 			return (0);
