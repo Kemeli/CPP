@@ -32,7 +32,7 @@ void	PhoneBook::search(PhoneBook &agenda)
 			}
 		}
 	}
-	std::cout << this->contacts[i] << std::endl;
+	std::cout << this->contacts[i];
 }
 
 void PhoneBook::displayContacts()
@@ -53,7 +53,6 @@ void PhoneBook::addContact(const Contact c)
 {
 	if (this->index == 8 || this->index == -1)
 		this->index = 0;
-	std::cout << this->index << std::endl;
 	this->contacts[this->index] = c;
 	this->index++;
 }
