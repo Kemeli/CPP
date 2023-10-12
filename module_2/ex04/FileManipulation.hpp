@@ -11,7 +11,6 @@ class FileManipulation
 	std::string	replace;
 
 	public:
-	FileManipulation();
 	char		*get_infile();
 	std::string	get_be_replaced();
 	std::string	get_replace();

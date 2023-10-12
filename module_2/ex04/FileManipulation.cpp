@@ -1,7 +1,5 @@
 #include "FileManipulation.hpp"
 
-FileManipulation::FileManipulation(){}
-
 char	*FileManipulation::get_infile(){
 	return (this->inFile);
 }
