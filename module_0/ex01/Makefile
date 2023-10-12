@@ -1,10 +1,10 @@
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = zombie
+NAME = phonebook
 
 all: $(NAME)
 
-OBJECTS = main.o randomChump.o newZombie.o Zombie.o
+OBJECTS = main.o PhoneBook.o Contact.o add.o utils.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
@@ -15,7 +15,7 @@ $(NAME): $(OBJECTS)
 clean:
 	rm -f $(OBJECTS)
 fclean: clean
-	rm -rf zombie
+	rm -rf phonebook
 re: fclean all
 
 .Phony: all clean fclean re

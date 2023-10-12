@@ -1,13 +1,21 @@
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-all: megaphone
+NAME = zombie
 
-megaphone: megaphone.o
-	c++ -g $(FLAGS) -o $@ $<
+all: $(NAME)
+
+OBJECTS = main.o randomChump.o newZombie.o Zombie.o
+
+$(NAME): $(OBJECTS)
+	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
+
+%.o: %.cpp
+	c++ ${FLAGS} -c $< -o $@
+
 clean:
-	rm -f megaphone.o
+	rm -f $(OBJECTS)
 fclean: clean
-	rm -rf megaphone
+	rm -rf zombie
 re: fclean all
 
 .Phony: all clean fclean re
