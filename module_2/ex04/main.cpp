@@ -2,21 +2,24 @@
 #include <iostream>
 #include <fstream>
 
-// int	main(int argc, char **argv)
-int	main()
+int	main(int argc, char **argv)
 {
 	std::string		line;
 	std::ifstream	inFile;
 	std::ofstream	outFile;
 
-	std::string		p1 = "file";
-	std::string		p2 = "MACARRÃO";
 	size_t			position;
+	std::string		first_parameter;
+	std::string		sec_parameter;
 
-	// if (argc != 4){
-	// 	std::cout << "Wrong number of arguments" << std::endl;
-	// 	return (0);
-	// }
+	if (argc != 4){
+		std::cout << "Wrong number of arguments" << std::endl;
+		return (0);
+	}
+
+	first_parameter = argv[2];
+	sec_parameter = argv[3];
+
 
 	inFile.open("infile.txt", std::ios::in);
 	if (inFile.is_open())
@@ -26,11 +29,11 @@ int	main()
 		{
 			while(std::getline(inFile, line))
 			{
-				while (line.find(p1) != std::string::npos)
+				while (line.find(first_parameter) != std::string::npos)
 				{
-					position = line.find(p1);
-					line.erase(position, p1.length());
-					line.insert(position, p2);
+					position = line.find(first_parameter);
+					line.erase(position, first_parameter.length());
+					line.insert(position, sec_parameter);
 				}
 				outFile << line << std::endl;
 			}
