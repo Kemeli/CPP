@@ -5,6 +5,7 @@ NAME = out
 all: $(NAME)
 
 OBJECTS = main.o \
+		FileManipulation.o
 
 
 $(NAME): $(OBJECTS)
