@@ -20,4 +20,11 @@ class FileManipulation
 	void		set_replace(std::string replace);
 };
 
+
+void	setters(FileManipulation& obj, char **argv);
+char	open_files(std::ifstream& inFile,
+					std::ofstream& outFile,
+					FileManipulation& obj);
+std::string	replace(FileManipulation& obj, std::ifstream& inFile);
+
 #endif
