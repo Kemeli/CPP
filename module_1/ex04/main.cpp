@@ -29,8 +29,12 @@ void	setters(FileManipulation& obj, char **argv)
 	obj.set_replace(argv[3]);
 }
 
-char	check_files(std::ifstream& inFile, std::ofstream& outFile)
+char	open_files(std::ifstream& inFile,
+					std::ofstream& outFile,
+					FileManipulation& obj)
 {
+	inFile.open(obj.get_infile());
+	outFile.open("outfile.txt", std::ios::out | std::ios::trunc);
 	if (!inFile.is_open())
 		std::cerr << "Couldn't open input file" << std::endl;
 	else if (!inFile.good())
@@ -42,7 +46,6 @@ char	check_files(std::ifstream& inFile, std::ofstream& outFile)
 	else
 		return (1);
 	return (0);
-
 }
 
 int	main(int argc, char **argv)
@@ -58,20 +61,14 @@ int	main(int argc, char **argv)
 	}
 
 	setters(obj, argv);
-	inFile.open(obj.get_infile());
-	outFile.open("outfile.txt", std::ios::out | std::ios::trunc);
-
-	if (!check_files(inFile, outFile))
-		return (0);
-
-	content = replace(obj, inFile);
-	if (content[0] == '\0')
+	if (open_files(inFile, outFile, obj))
 	{
-		std::cout << "Empty file" << std::endl;
-		return (0);
+		content = replace(obj, inFile);
+		if (content[0] == '\0')
+			std::cout << "Empty file" << std::endl;
+		else
+			outFile << content << std::endl;
 	}
-	else
-		outFile << content << std::endl;
 
 	if (outFile.is_open()) outFile.close();
 	if (inFile.is_open()) inFile.close();
