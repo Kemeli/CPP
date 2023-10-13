@@ -2,15 +2,11 @@
 #include <fstream>
 #include "FileManipulation.hpp"
 
-void	replace(FileManipulation& obj,
-				std::ifstream& inFile,
-				std::ofstream& outFile
-		)
+std::string	replace(FileManipulation& obj, std::ifstream& inFile)
 {
 	std::string	line;
 	size_t		position;
-
-	
+	std::string	content;
 
 	while(std::getline(inFile, line))
 	{
@@ -20,9 +16,10 @@ void	replace(FileManipulation& obj,
 			line.erase(position, obj.get_be_replaced().length());
 			line.insert(position, obj.get_replace());
 		}
-		outFile << line << std::endl;
+		content += line;
+		content.insert(content.length(), "\n");
 	}
-	outFile.close();
+	return (content);
 }
 
 void	setters(FileManipulation& obj, char **argv)
@@ -32,11 +29,28 @@ void	setters(FileManipulation& obj, char **argv)
 	obj.set_replace(argv[3]);
 }
 
+char	check_files(std::ifstream& inFile, std::ofstream& outFile)
+{
+	if (!inFile.is_open())
+		std::cerr << "Couldn't open input file" << std::endl;
+	else if (!inFile.good())
+		std::cerr << "Input file doesn't have enough permitions" << std::endl;
+	else if (!outFile.is_open())
+		std::cerr << "Couldn't open output file" << std::endl;
+	else if (!outFile.good())
+		std::cerr << "Output file doesn't have enough permitions" << std::endl;
+	else
+		return (1);
+	return (0);
+
+}
+
 int	main(int argc, char **argv)
 {
 	FileManipulation	obj;
 	std::ofstream		outFile;
 	std::ifstream		inFile;
+	std::string			content;
 
 	if (argc != 4){
 		std::cout << "Wrong number of arguments" << std::endl;
@@ -45,16 +59,20 @@ int	main(int argc, char **argv)
 
 	setters(obj, argv);
 	inFile.open(obj.get_infile());
+	outFile.open("outfile.txt", std::ios::out | std::ios::trunc);
 
-	if (inFile.is_open())
+	if (!check_files(inFile, outFile))
+		return (0);
+
+	content = replace(obj, inFile);
+	if (content[0] == '\0')
 	{
-		outFile.open("outfile.txt", std::ios::out | std::ios::trunc);
-		if (outFile.is_open())
-			replace(obj, inFile, outFile);
-		else
-			std::cerr << "coudn't open output file" << std::endl;
-		inFile.close();
+		std::cout << "Empty file" << std::endl;
+		return (0);
 	}
 	else
-		std::cerr << "coudn't open input file" << std::endl;
+		outFile << content << std::endl;
+
+	if (outFile.is_open()) outFile.close();
+	if (inFile.is_open()) inFile.close();
 }
