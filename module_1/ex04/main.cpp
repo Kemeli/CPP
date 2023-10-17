@@ -8,11 +8,11 @@ int	main(int argc, char **argv)
 	std::ifstream		inFile;
 	std::string			content;
 
-	if (argc != 4){
+	if (argc != 4)
+	{
 		std::cout << "Wrong number of arguments" << std::endl;
 		return (0);
 	}
-
 	setters(obj, argv);
 	if (open_files(inFile, outFile, obj))
 	{
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 		else
 			outFile << content << std::endl;
 	}
-
 	if (outFile.is_open()) outFile.close();
 	if (inFile.is_open()) inFile.close();
 }

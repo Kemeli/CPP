@@ -21,6 +21,7 @@ char	open_files(std::ifstream& inFile,
 	strout = strin.append(".replace");
 	if (inFile.is_open())
 		outFile.open(strout.data(), std::ios::out | std::ios::trunc);
+
 	if (!inFile.is_open())
 		std::cerr << "Couldn't open input file" << std::endl;
 	else if (!inFile.good())
