@@ -4,7 +4,9 @@ NAME = zombie
 
 all: $(NAME)
 
-OBJECTS = zombieHorde.o main.o Zombie.o
+OBJECTS = zombieHorde.o \
+		main.o \
+		Zombie.o
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
 
