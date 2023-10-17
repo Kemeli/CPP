@@ -4,7 +4,10 @@ NAME = zombie
 
 all: $(NAME)
 
-OBJECTS = main.o randomChump.o newZombie.o Zombie.o
+OBJECTS = main.o \
+		randomChump.o \
+		newZombie.o \
+		Zombie.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
