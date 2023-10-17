@@ -1,6 +1,6 @@
 #include "FileManipulation.hpp"
 
-char	*FileManipulation::get_infile(){
+std::string	FileManipulation::get_infile(){
 	return (this->inFile);
 }
 

@@ -6,12 +6,12 @@
 class FileManipulation
 {
 	private:
-	char		*inFile;
+	std::string	inFile;
 	std::string	be_replaced;
 	std::string	replace;
 
 	public:
-	char		*get_infile();
+	std::string	get_infile();
 	std::string	get_be_replaced();
 	std::string	get_replace();
 

@@ -12,8 +12,12 @@ char	open_files(std::ifstream& inFile,
 					std::ofstream& outFile,
 					FileManipulation& obj)
 {
-	inFile.open(obj.get_infile());
-	outFile.open("outfile.txt", std::ios::out | std::ios::trunc);
+	std::string	strin;
+	std::string	strout;
+
+	strin = obj.get_infile();
+	inFile.open(strin.data());
+	outFile.open("outfile.replace", std::ios::out | std::ios::trunc);
 	if (!inFile.is_open())
 		std::cerr << "Couldn't open input file" << std::endl;
 	else if (!inFile.good())
