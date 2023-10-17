@@ -5,8 +5,8 @@ int	main(void)
 	std::string	name1;
 	std::string	name2;
 
-	name1 = "Anderson";
-	name2 = "Janaina";
+	name1 = "zumzum";
+	name2 = "bibi";
 
 	randomChump(name1);
 
