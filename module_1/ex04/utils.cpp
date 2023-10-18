@@ -8,28 +8,35 @@ void	setters(FileManipulation& obj, char **argv)
 	obj.set_replace(argv[3]);
 }
 
-char	open_files(std::ifstream& inFile,
-					std::ofstream& outFile,
-					FileManipulation& obj)
+char	output_file(std::ofstream& outFile, FileManipulation& obj)
+{
+	std::string	strout;
+	std::string	strin;
+
+	strin = obj.get_infile();
+	strout = strin.append(".replace");
+	outFile.open(strout.data(), std::ios::out | std::ios::trunc);
+
+	if (!outFile.is_open())
+		std::cerr << "Couldn't open output file" << std::endl;
+	else if (!outFile.good())
+		std::cerr << "Output file doesn't have enough permitions" << std::endl;
+	else
+		return (1);
+	return (0);
+}
+
+char	input_file(std::ifstream& inFile, FileManipulation& obj)
 {
 	std::string	strin;
-	std::string	strout;
 
 	strin = obj.get_infile();
 	inFile.open(strin.data());
-
-	strout = strin.append(".replace");
-	if (inFile.is_open())
-		outFile.open(strout.data(), std::ios::out | std::ios::trunc);
 
 	if (!inFile.is_open())
 		std::cerr << "Couldn't open input file" << std::endl;
 	else if (!inFile.good())
 		std::cerr << "Input file doesn't have enough permitions" << std::endl;
-	else if (!outFile.is_open())
-		std::cerr << "Couldn't open output file" << std::endl;
-	else if (!outFile.good())
-		std::cerr << "Output file doesn't have enough permitions" << std::endl;
 	else
 		return (1);
 	return (0);

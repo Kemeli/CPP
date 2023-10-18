@@ -1,6 +1,7 @@
 #include "FileManipulation.hpp"
 #include <fstream>
 
+
 int	main(int argc, char **argv)
 {
 	FileManipulation	obj;
@@ -14,12 +15,15 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	setters(obj, argv);
-	if (open_files(inFile, outFile, obj))
+	if (input_file(inFile, obj))
 	{
 		content = replace(obj, inFile);
-		if (content[0] == '\0')
+		if (content.empty())
+		{
 			std::cout << "Empty file" << std::endl;
-		else
+			return (0);
+		}
+		if (output_file(outFile, obj))
 			outFile << content << std::endl;
 	}
 	if (outFile.is_open()) outFile.close();
