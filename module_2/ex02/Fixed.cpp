@@ -1,5 +1,4 @@
 #include "Fixed.hpp"
-#include <iostream>
 #include <math.h>
 
 Fixed::Fixed()
@@ -48,13 +47,8 @@ int	Fixed::getRawBits( void ) const
 
 void	Fixed::setRawBits( int const raw )
 {
-	// std::cout << "setRawBits member function called" << std::endl;
 	this->fixed_point = raw;
 }
-
-// #############################################################################
-// Overloading operators
-//##############################################################################
 
 Fixed&	Fixed::operator=(const Fixed&obj)
 {
@@ -63,7 +57,11 @@ Fixed&	Fixed::operator=(const Fixed&obj)
 	return *this;
 }
 
-// transforms it back to float in order to multiplicate considering the correct
+//##############################################################################
+// Arithmetic operators
+//##############################################################################
+
+// transforms it back to float in order to multiply it considering the correct
 // fractional bits
 Fixed	Fixed::operator+(const Fixed&obj)
 {
@@ -100,6 +98,10 @@ Fixed	Fixed::operator/(const Fixed&obj)
 		this->toFloat() / obj.toFloat() * ( 1 << this->fractional_bits ));
 	return aux;
 }
+
+//##############################################################################
+// Comparing operators
+//##############################################################################
 
 bool	Fixed::operator<(const Fixed&fixed)
 {
@@ -143,6 +145,10 @@ bool	Fixed::operator!=(const Fixed&fixed)
 	return false;
 }
 
+//##############################################################################
+// Increment/Decrement operators
+//##############################################################################
+
 Fixed	Fixed::operator++()
 {
 	this->fixed_point++;
@@ -177,4 +183,36 @@ std::ostream& operator<<(std::ostream& out, const Fixed& obj)
 {
 	out << obj.toFloat();
 	return (out);
+}
+
+//##############################################################################
+// Overloaded functions
+//##############################################################################
+
+Fixed&	Fixed::min(Fixed& a, Fixed& b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
+
+const Fixed&	Fixed::min(const Fixed& a, const Fixed& b)
+{
+	if (a.getRawBits() < b.getRawBits())
+		return a;
+	return b;
+}
+
+Fixed&	Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
+
+const Fixed&	Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if (a.getRawBits() > b.getRawBits())
+		return a;
+	return b;
 }
