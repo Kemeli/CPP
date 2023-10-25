@@ -149,13 +149,14 @@ bool	Fixed::operator!=(const Fixed&fixed)
 // Increment/Decrement operators
 //##############################################################################
 
-Fixed	Fixed::operator++()
+// the compiler understands that with the argument 'int', it is postfixed.
+Fixed	Fixed::operator++(void)
 {
 	this->fixed_point++;
 	return *this;
 }
 
-Fixed	Fixed::operator--()
+Fixed	Fixed::operator--(void)
 {
 	this->fixed_point--;
 	return *this;
@@ -188,6 +189,8 @@ std::ostream& operator<<(std::ostream& out, const Fixed& obj)
 //##############################################################################
 // Overloaded functions
 //##############################################################################
+
+// overloading operators are not const, so you can't pass const values to it.
 
 Fixed&	Fixed::min(Fixed& a, Fixed& b)
 {

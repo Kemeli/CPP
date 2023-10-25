@@ -27,7 +27,7 @@ Fixed::Fixed(const int value)
 Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->fixed_point = value * (1 << this->fractional_bits);
+	this->fixed_point = roundf(value * (1 << this->fractional_bits));
 }
 
 float	Fixed::toFloat( void ) const
