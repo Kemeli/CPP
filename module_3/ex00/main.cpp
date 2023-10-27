@@ -13,12 +13,14 @@ int	main()
 	arthur.takeDamage(ford.get_attack_damage());
 
 	arthur.attack(ford.get_name());
-	ford.takeDamage(arthur.get_attack_damage());
+	ford.takeDamage(10);
 
-	arthur.beRepaired(10);
+	ford.attack(arthur.get_name());
 
-	std::cout << ford.get_name()
-			<< " got in Heart of Gold and was never seen again." << std::endl;
+	// arthur.beRepaired(10);
 
-	std::cout << "\n\tThe end!\n" << std::endl;
+	// std::cout << ford.get_name()
+	// 		<< " got in Heart of Gold and was never seen again." << std::endl;
+
+	// std::cout << "\n\tThe end!\n" << std::endl;
 }

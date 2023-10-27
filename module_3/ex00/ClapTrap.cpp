@@ -63,11 +63,19 @@ int ClapTrap::get_attack_damage() const
 
 void	ClapTrap::attack(const std::string& target)
 {
-	std::cout << this->name << " attacks " << target
-			<< " causing " << this->attack_damage << " points of damage! "
-			<< std::endl;
-	this->energy_points--;
-
+	if (this->hit_points < 1 || this->energy_points < 1)
+	{
+		std:: cout << this->name << " couldn't attack " << std::endl;
+		std::cout << "\t" << this->name << " hit points is "
+			<< this->hit_points << std::endl;
+	}
+	else
+	{
+		std::cout << this->name << " attacks " << target
+				<< " causing " << this->attack_damage << " points of damage! "
+				<< std::endl;
+		this->energy_points--;
+	}
 	std::cout << "\t" << this->name << " energy points is "
 			<< this->energy_points << std::endl;
 }
