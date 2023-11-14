@@ -1,8 +1,12 @@
 #ifndef CLAP_TRAP_HPP
 # define CLAP_TRAP_HPP
 
-# include <ostream>
 # include <iostream>
+
+# define PINK "\t\033[35m"
+# define YELLOW "\t\033[0;33m"
+# define RED "\033[31m"
+# define RESET_COLOR "\033[0m"
 
 class ClapTrap
 {
@@ -28,6 +32,9 @@ class ClapTrap
 	int			get_hit_points() const;
 	int			get_energy_points() const;
 	int			get_attack_damage() const;
+
+	void	print_hit_points(void);
+	void	print_energy_points(void);
 };
 
 #endif

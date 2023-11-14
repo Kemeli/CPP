@@ -37,7 +37,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& obj)
 		this->attack_damage = obj.get_attack_damage();
 		this->energy_points = obj.get_energy_points();
 	}
-	return *this; //returns this dereferenced, the real content
+	return *this;
 }
 
 void	ScavTrap::guardGate()
@@ -48,18 +48,17 @@ void	ScavTrap::guardGate()
 
 void	ScavTrap::attack(const std::string& target)
 {
+	std::string	name = this->name;
+	int			hit = this->hit_points;
 
-	if (this->hit_points < 1 || energy_points < 1)
-	{
-		std::cout << "ScavTrap " << this->name << " coudn't attack " << std::endl;
-		std::cout << "\t" << this->name << " hit points is " << this->hit_points << std::endl;
-	}
-	else
-	{
-		std::cout << "ScavTrap " << this->name << " attacks " << target <<
-		" causing " << attack_damage << " points of damage! " << std::endl;
+	if (!hit || !this->energy_points)
+		std::cout << "ScavTrap " << name << " unsuccessfully tried to attack "
+		<< target << std::endl;
+	else{
+		std::cout << "ScavTrap " << name << " attacks " << target << " causing "
+			<< this->attack_damage << " points of damage! "<< std::endl;
 		this->energy_points--;
 	}
-	std::cout << "\t" << this->name << " energy points is " << this->energy_points
-		<< std::endl;
+	this->print_hit_points();
+	this->print_energy_points();
 }

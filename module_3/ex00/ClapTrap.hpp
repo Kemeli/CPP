@@ -1,7 +1,6 @@
 #ifndef CLAP_TRAP_HPP
 # define CLAP_TRAP_HPP
 
-# include <ostream>
 # include <iostream>
 
 # define PINK "\t\033[35m"

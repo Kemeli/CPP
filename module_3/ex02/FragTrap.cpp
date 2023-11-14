@@ -49,19 +49,16 @@ void	FragTrap::highFivesGuys(void)
 void	FragTrap::attack(const std::string& target)
 {
 	std::string	name = this->name;
-	int			hit_points = this->hit_points;
+	int			hit = this->hit_points;
 
-	if (hit_points < 1 || energy_points < 1)
-	{
-		std::cout << "FragTrap " << name << " coudn't attack " << std::endl;
-		std::cout << "\t" << name << " hit points is " << hit_points << std::endl;
-	}
-	else
-	{
-		std::cout << "FragTrap " << name << " attacks " << target <<
-		" causing " << attack_damage << " points of damage! " << std::endl;
+	if (!hit || !this->energy_points)
+		std::cout << "FragTrap " << name << " unsuccessfully tried to attack "
+		<< target << std::endl;
+	else{
+		std::cout << "FragTrap " << name << " attacks " << target << " causing "
+			<< this->attack_damage << " points of damage! "<< std::endl;
 		this->energy_points--;
 	}
-	std::cout << "\t" << name << " energy points is " << this->energy_points
-		<< std::endl;
+	this->print_hit_points();
+	this->print_energy_points();
 }
