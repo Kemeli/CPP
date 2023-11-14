@@ -1,11 +1,13 @@
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = fixed
+NAME = fragtrap
 
 all: $(NAME)
 
 OBJECTS = main.o \
-		  Fixed.o
+		ClapTrap.o \
+		ScavTrap.o \
+		FragTrap.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
@@ -16,7 +18,7 @@ $(NAME): $(OBJECTS)
 clean:
 	rm -f $(OBJECTS)
 fclean: clean
-	rm -rf fixed
+	rm -rf fragtrap
 re: fclean all
 
 .Phony: all clean fclean re
