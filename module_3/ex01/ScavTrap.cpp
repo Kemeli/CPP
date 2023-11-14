@@ -3,25 +3,41 @@
 ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "ScavTrap default constructor was called" << std::endl;
-	this->set_name("Eddie the Shipboard Computer");
-	this->set_hit_points(100);
-	this->set_energy_points(50);
-	this->set_attack_damage(20);
+	this->name = "Eddie the Shipboard Computer";
+	this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "ScavTrap constructor was called" << std::endl;
-	this->set_name(name);
-	this->set_hit_points(100);
-	this->set_energy_points(50);
-	this->set_attack_damage(20);
+	this->hit_points = 100;
+	this->energy_points = 50;
+	this->attack_damage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& obj)
+ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj)
 {
 	std::cout << "Copy ScavTrap constructor was called" << std::endl;
 	*this = obj;
+}
+
+ScavTrap::~ScavTrap()
+{
+	std::cout << "ScavTrap destructor was called" << std::endl;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& obj)
+{
+	if (this != &obj)
+	{
+		this->name = obj.get_name();
+		this->hit_points = obj.get_hit_points();
+		this->attack_damage = obj.get_attack_damage();
+		this->energy_points = obj.get_energy_points();
+	}
+	return *this; //returns this dereferenced, the real content
 }
 
 void	ScavTrap::guardGate()
@@ -30,29 +46,20 @@ void	ScavTrap::guardGate()
 		" is now in Gate keeper mode." << std::endl;
 }
 
-ScavTrap::~ScavTrap()
-{
-	std::cout << "ScavTrap destructor was called" << std::endl;
-}
-
 void	ScavTrap::attack(const std::string& target)
 {
-	std::string	name = this->get_name();
-	int			hit = this->get_hit_points();
-	int			energy = this->get_energy_points();
-	int			attack_damage = this->get_attack_damage();
 
-	if (hit < 1 || energy < 1)
+	if (this->hit_points < 1 || energy_points < 1)
 	{
-		std::cout << "ScavTrap " << name << " coudn't attack " << std::endl;
-		std::cout << "\t" << name << " hit points is " << hit << std::endl;
+		std::cout << "ScavTrap " << this->name << " coudn't attack " << std::endl;
+		std::cout << "\t" << this->name << " hit points is " << this->hit_points << std::endl;
 	}
 	else
 	{
-		std::cout << "ScavTrap " << name << " attacks " << target <<
+		std::cout << "ScavTrap " << this->name << " attacks " << target <<
 		" causing " << attack_damage << " points of damage! " << std::endl;
-		this->set_energy_points(energy - 1);
+		this->energy_points--;
 	}
-	std::cout << "\t" << name << " energy points is " << get_energy_points()
+	std::cout << "\t" << this->name << " energy points is " << this->energy_points
 		<< std::endl;
 }

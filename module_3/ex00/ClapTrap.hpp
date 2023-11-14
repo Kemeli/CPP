@@ -1,5 +1,5 @@
 #ifndef CLAP_TRAP_HPP
-# define CLAP_TRAP
+# define CLAP_TRAP_HPP
 
 # include <ostream>
 # include <iostream>
@@ -22,7 +22,7 @@ class ClapTrap
 	void	takeDamage(unsigned int amount);
 	void	beRepaired(unsigned int amount);
 
-	ClapTrap&	operator=(const ClapTrap& ct);
+	ClapTrap&	operator=(const ClapTrap& obj);
 
 	std::string	get_name() const;
 	int			get_hit_points() const;

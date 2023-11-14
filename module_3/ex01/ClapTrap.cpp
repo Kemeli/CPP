@@ -60,26 +60,6 @@ int ClapTrap::get_attack_damage() const
 	return this->attack_damage;
 }
 
-void ClapTrap::set_name(std::string name)
-{
-	this->name = name;
-}
-
-void ClapTrap::set_hit_points(int hit_points)
-{
-	this->hit_points = hit_points;
-}
-
-void ClapTrap::set_energy_points(int energy_points)
-{
-	this->energy_points = energy_points;
-}
-
-void ClapTrap::set_attack_damage(int attack_damage)
-{
-	this->attack_damage = attack_damage;
-}
-
 void	ClapTrap::attack(const std::string& target)
 {
 	if (this->hit_points < 1 || this->energy_points < 1)

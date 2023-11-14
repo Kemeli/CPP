@@ -21,5 +21,10 @@ int	main()
 	std::cout << arthur.get_name()
 			<< " went to Magrathea and was never seen again." << std::endl;
 
+	// tests
+	// ScavTrap obj;
+	// obj = ford;
+	// std::cout << ford.get_name() << std::endl;
+
 	std::cout << "\n\tThe end!\n" << std::endl;
 }
