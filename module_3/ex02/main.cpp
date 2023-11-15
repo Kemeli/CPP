@@ -7,6 +7,9 @@ int	main()
 
 	FragTrap ft;
 	ScavTrap st;
+	// FragTrap ft("Eddie the Shipboard Computer");
+	// ScavTrap st("Marvin");
+
 
 	std::cout << "\n\tGo!\n" << std::endl;
 
