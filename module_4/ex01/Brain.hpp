@@ -8,13 +8,14 @@
 
 class Brain
 {
-	public:
-		Brain(void);
-		Brain(const Brain& obj);
-		~Brain(void);
-		Brain& operator=(const Brain& obj);
 	private:
-		std::string	ideas[100];
+	std::string	ideas[100];
+
+	public:
+	Brain(void);
+	Brain(const Brain& obj);
+	~Brain(void);
+	Brain& operator=(const Brain& obj);
 };
 
 #endif

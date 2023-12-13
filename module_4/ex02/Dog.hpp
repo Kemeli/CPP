@@ -8,13 +8,14 @@
 class Dog : public Animal
 {
 	private:
-	Brain*		brain;
+	Brain*	brain;
 
 	public:
-	Dog(void); //setar tipo
-	~Dog(void);
+	Dog(void);
 	Dog(const Dog& obj);
+	~Dog(void);
 	Dog& operator=(const Dog& obj);
+
 	void		makeSound(void) const;
 	std::string	getType(void) const;
 };
