@@ -2,8 +2,8 @@
 
 Cat::Cat(void)
 {
-	this->type = "Cat";
 	std::cout << "Cat constructor called" << std::endl;
+	this->type = "Cat";
 }
 
 Cat::Cat(const Cat& obj) : Animal(obj)
