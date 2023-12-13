@@ -13,10 +13,10 @@ class WrongAnimal
 	WrongAnimal();
 	WrongAnimal(const WrongAnimal &copy);
 	~WrongAnimal();
-
-	std::string getType() const;
 	WrongAnimal &operator=(const WrongAnimal &copy);
-	void makeSound() const;
+
+	std::string	getType() const;
+	void		makeSound() const;
 };
 
 #endif

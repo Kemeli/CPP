@@ -7,10 +7,11 @@
 class Cat : public Animal
 {
 	public:
-	Cat(void); //setar tipo
+	Cat(void);
 	Cat(const Cat& obj);
 	~Cat(void);
 	Cat& operator=(const Cat& obj);
+
 	void		makeSound(void) const;
 	std::string	getType(void) const;
 };
