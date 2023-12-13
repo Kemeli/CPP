@@ -29,6 +29,7 @@ std::string	Animal::getType(void) const
 
 Animal& Animal::operator=(const Animal& obj)
 {
+	std::cout << "Animal assignation operator called" << std::endl;
 	this->type = obj.type;
 	return (*this);
 }
