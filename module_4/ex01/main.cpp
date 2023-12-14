@@ -26,10 +26,8 @@ int main()
 	delete dog2;
 
 	std::cout << "\n--------cat deep copy--------" << std::endl;
-	Cat *cat = new Cat();
-	Cat *cat2 = new Cat();
-	*cat2 = *cat;
-	cat2->makeSound();
-	delete cat;
-	delete cat2;
+	Cat test;
+	Cat test2;
+	test = test2;
+	test.makeSound();
 }

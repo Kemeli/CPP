@@ -8,7 +8,7 @@ Brain::Brain(void)
 Brain::Brain(const Brain& obj)
 {
 	std::cout << PINK << "Brain copy constructor called" << RESET_COLOR << std::endl;
-	*this = obj; // calls operator= so it is deep copy
+	*this = obj;
 }
 
 Brain::~Brain(void)
