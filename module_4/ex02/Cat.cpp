@@ -1,7 +1,7 @@
 #include "Cat.hpp"
 #include "Brain.hpp"
 
-Cat::Cat(void)
+Cat::Cat(void) : Animal()
 {
 	std::cout << RED << "Cat constructor called" << RESET_COLOR << std::endl;
 	this->type = "Cat";
