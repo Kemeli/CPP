@@ -21,6 +21,7 @@ void	Dog::makeSound(void) const
 Dog::~Dog(void)
 {
 	std::cout << YELLOW << "Dog destructor called" << RESET_COLOR << std::endl;
+	this->brain = NULL;
 	delete this->brain;
 }
 
@@ -35,7 +36,8 @@ Dog& Dog::operator=(const Dog& obj)
 	if (this == &obj)
 		return (*this);
 	this->type = obj.type;
-	delete this->brain;
+	if (this->brain)
+		delete this->brain;
 	this->brain = new Brain(*obj.brain);
 	return (*this);
 }

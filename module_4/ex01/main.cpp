@@ -27,7 +27,5 @@ int main()
 
 	std::cout << "\n--------cat deep copy--------" << std::endl;
 	Cat test;
-	Cat test2;
-	test = test2;
-	test.makeSound();
+	{Cat test2 = test;}
 }

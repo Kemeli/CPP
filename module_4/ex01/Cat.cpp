@@ -11,6 +11,7 @@ Cat::Cat(void) : Animal()
 Cat::Cat(const Cat& obj) : Animal(obj)
 {
 	std::cout << RED <<  "Cat copy constructor called" << RESET_COLOR << std::endl;
+	this->brain = NULL;
 	*this = obj;
 }
 
@@ -36,7 +37,8 @@ Cat& Cat::operator=(const Cat& obj)
 	if (this == &obj)
 		return (*this);
 	this->type = obj.type;
-	delete this->brain;
+	if (this->brain)
+		delete this->brain;
 	this->brain = new Brain(*obj.brain);
 	return (*this);
 }
