@@ -9,10 +9,10 @@ Bureaucrat::Bureaucrat(const std::string& newName, int newGrade) : name(newName)
 	grade = newGrade;
 }
 
-void Bureaucrat::checkGradeRange(int newGrade) {
-	if (newGrade < 1)
+void Bureaucrat::checkGradeRange(int grade) {
+	if (grade < 1)
 		throw GradeTooHighException();
-	else if (newGrade > 150)
+	else if (grade > 150)
 		throw GradeTooLowException();
 }
 
