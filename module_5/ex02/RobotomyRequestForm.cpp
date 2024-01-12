@@ -27,7 +27,9 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
 	AForm::checkExecutionRequirements(executor);
 	std::cout << "* drilling noises *" << std::endl;
-	if (rand() % 2)
+	srand((unsigned) time(NULL));
+	int i = rand() % 2;
+	if (i)
 		std::cout << this->getTarget() << " has been robotomized successfully" << std::endl;
 	else
 		std::cout << this->getTarget() << " robotomization failed" << std::endl;
