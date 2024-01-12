@@ -29,16 +29,16 @@ public:
 	const std::string&	getName() const;
 	int					getGrade() const;
 
-	void	incrementGrade();
-	void	decrementGrade();
+	void				incrementGrade();
+	void				decrementGrade();
 
 private:
-	const std::string name;
-	int grade;
+	const std::string	name;
+	int					grade;
 
-	void checkGradeRange(int newGrade);
+	void				checkGradeRange(int newGrade);
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
+std::ostream&			operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
 #endif

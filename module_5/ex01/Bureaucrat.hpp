@@ -29,20 +29,20 @@ public:
 
 	Bureaucrat(const std::string& name, int grade);
 
-	const std::string& getName() const;
-	int getGrade() const;
+	const std::string&	getName() const;
+	int					getGrade() const;
 
-	void incrementGrade();
-	void decrementGrade();
+	void				incrementGrade();
+	void				decrementGrade();
 
-	void checkGradeRange(int newGrade);
-	void signForm(Form& form_to_be_signed) const;
+	void				signForm(Form& form_to_be_signed) const;
 
 private:
-	const std::string name;
-	int grade;
+	const std::string	name;
+	int					grade;
+	void				checkGradeRange(int newGrade);
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
+std::ostream&			operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
 #endif

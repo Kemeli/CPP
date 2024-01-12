@@ -59,6 +59,6 @@ private:
 	const std::string	_target;
 };
 
-std::ostream& operator<<(std::ostream& os, const AForm& form);
+std::ostream&			operator<<(std::ostream& os, const AForm& form);
 
 #endif

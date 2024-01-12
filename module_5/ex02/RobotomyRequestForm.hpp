@@ -8,16 +8,17 @@
 
 class RobotomyRequestForm : public AForm
 {
-	private:
-		RobotomyRequestForm();
-
 	public:
-		RobotomyRequestForm(const std::string target);
-		~RobotomyRequestForm();
 		RobotomyRequestForm(const RobotomyRequestForm& obj);
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& obj);
+		~RobotomyRequestForm();
+
+		RobotomyRequestForm(const std::string target);
 
 		void execute(Bureaucrat const &executor) const;
+
+	private:
+		RobotomyRequestForm();
 };
 
 #endif
