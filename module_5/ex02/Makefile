@@ -6,7 +6,10 @@ all: $(NAME)
 
 OBJECTS = main.o \
 		  Bureaucrat.o \
-		  Form.o 
+		  AForm.o \
+		  ShrubberyCreationForm.o \
+		  RobotomyRequestForm.o \
+		  PresidentialPardonForm.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)

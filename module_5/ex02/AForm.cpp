@@ -110,6 +110,18 @@ std::ostream& operator<<(std::ostream& os, const AForm& form) {
 	os << "Form name: " << form.getName() << "\n" \
 		<< "Signed: " << std::boolalpha << form.getSigned() << "\n" \
 		<< "Grade required to sign: " << form.getGradeToSign() << "\n" \
-		<< "Grade required to execute: " << form.getGradeToExecute() << "\n";
+		<< "Grade required to execute: " << form.getGradeToExecute() << "\n" \
+		<< "Target: " << form.getTarget() << "\n";
+
 	return os;
+}
+
+void AForm::checkExecutionRequirements(Bureaucrat const& executor) const {
+	if (!getSigned()) {
+		throw NotSignedException();
+	}
+
+	if (executor.getGrade() > getGradeToExecute()) {
+		throw GradeTooLowException();
+	}
 }

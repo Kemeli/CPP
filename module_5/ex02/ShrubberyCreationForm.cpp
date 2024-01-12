@@ -1,7 +1,9 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("default ShrubberyCreationForm", 145, 137)
-{} //target?
+{
+	this->setTarget("home");
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) :
 	AForm("ShrubberyCreationForm", 145, 137)
@@ -21,3 +23,23 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+{
+	AForm::checkExecutionRequirements(executor);
+	std::ofstream file;
+	std::string filename = this->getTarget() + "_shrubbery";
+	file.open(filename.c_str());
+	file << "      /\\\n";
+	file << "     /\\*\\\n";
+	file << "    /\\O\\*\\\n";
+	file << "   /*/\\/\\/\\\n";
+	file << "  /\\O\\/\\*\\/\\\n";
+	file << " /\\*\\/\\*\\/\\/\\\n";
+	file << "/\\O\\/\\/*/\\/O/\\\n";
+	file << "      ||\n";
+	file << "      ||\n";
+	file << "      ||\n";
+	file << "    \\====/\n";
+	file << "     \\__/  \n";
+	file.close();
+}

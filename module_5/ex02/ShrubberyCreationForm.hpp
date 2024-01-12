@@ -1,6 +1,9 @@
-#include <iostream>
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
+
+# include <iostream>
+# include "AForm.hpp"
+# include "Bureaucrat.hpp"
 
 class ShrubberyCreationForm : public AForm
 {
@@ -13,3 +16,5 @@ class ShrubberyCreationForm : public AForm
 
 		void execute(const Bureaucrat& executor) const;
 };
+
+#endif

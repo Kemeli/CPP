@@ -6,6 +6,8 @@
 #include "AForm.hpp"
 
 # define PINK "\033[35m"
+# define GREEN "\033[0;32m"
+# define ANSI_COLOR_BLUE "\x1b[34m"
 # define RESET_COLOR "\033[0m"
 
 class AForm;
@@ -37,6 +39,9 @@ public:
 
 	void checkGradeRange(int newGrade);
 	void signForm(AForm& form_to_be_signed) const;
+
+	void executeForm(AForm const & form) const;
+
 
 private:
 	const std::string name;
