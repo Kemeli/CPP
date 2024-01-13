@@ -11,8 +11,6 @@ AForm::AForm(
 	_gradeToSign(gradeToSign),
 	_gradeToExecute(gradeToExecute)
 {
-	checkGradeRange(_gradeToSign);
-	checkGradeRange(_gradeToExecute);
 }
 
 void AForm::checkGradeRange(int grade) {
