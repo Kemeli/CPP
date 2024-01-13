@@ -82,7 +82,7 @@ int	main(void)
 		std::cout << "Bureaucrat created: " << b5 << std::endl;
 
 		RobotomyRequestForm	form("f5");
-		std::cout << "CEO did not sign form!\n";
+		std::cout << "Deep Thought did not sign form!\n";
 
 		std::cout << GREEN << "\nForm created:\n" << RESET_COLOR << form;
 

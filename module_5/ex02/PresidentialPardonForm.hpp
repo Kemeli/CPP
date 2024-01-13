@@ -1,9 +1,9 @@
 #ifndef PRESIDENTIALPARDONFORM_HPP
 # define PRESIDENTIALPARDONFORM_HPP
 
-#include <iostream>
-#include "Bureaucrat.hpp"
-#include "AForm.hpp"
+# include <iostream>
+# include "Bureaucrat.hpp"
+# include "AForm.hpp"
 
 class PresidentialPardonForm : public AForm
 {
