@@ -4,18 +4,6 @@ Bureaucrat::Bureaucrat() : name("default Bureaucrat"), grade(50) {}
 
 Bureaucrat::~Bureaucrat() {}
 
-Bureaucrat::Bureaucrat(const std::string& newName, int newGrade) : name(newName) {
-	checkGradeRange(newGrade);
-	grade = newGrade;
-}
-
-void Bureaucrat::checkGradeRange(int newGrade) {
-	if (newGrade < 1)
-		throw GradeTooHighException();
-	else if (newGrade > 150)
-		throw GradeTooLowException();
-}
-
 Bureaucrat& Bureaucrat::operator= (const Bureaucrat& obj)
 {
 	const_cast<std::string&>(this->name) = obj.name;
@@ -26,6 +14,18 @@ Bureaucrat& Bureaucrat::operator= (const Bureaucrat& obj)
 Bureaucrat::Bureaucrat(const Bureaucrat& obj)
 {
 	*this = obj;
+}
+
+void Bureaucrat::checkGradeRange(int newGrade) {
+	if (newGrade < 1)
+		throw GradeTooHighException();
+	else if (newGrade > 150)
+		throw GradeTooLowException();
+}
+
+Bureaucrat::Bureaucrat(const std::string& newName, int newGrade) : name(newName) {
+	checkGradeRange(newGrade);
+	grade = newGrade;
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw(){
