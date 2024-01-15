@@ -16,7 +16,7 @@ int main()
 	std::cout << ANSI_COLOR_BLUE << "\n------Intern creates RobotomyRequestForm------\n\n" << RESET_COLOR;
 	try
 	{
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
 		std::cout << *rrf << std::endl;
 
 		std::cout << "Deep Thought signed form: ";
@@ -35,15 +35,16 @@ int main()
 	std::cout << ANSI_COLOR_BLUE << "\n------Intern creates PresidentialPardonForm------\n\n" << RESET_COLOR;
 	try
 	{
-		ppf = someRandomIntern.makeForm("presidential pardon", "home");
+		ppf = someRandomIntern.makeForm("PresidentialPardonForm", "home");
 		std::cout << *ppf << std::endl;
 
 		std::cout << "Deep Thought signed form: ";
-		b1.signForm(*rrf);
+		std::cout << "\n\nHEEEEEEEEEEEEEEEERE\n\n";
+		b1.signForm(*ppf);
 		std::cout << GREEN << "\nForm created:\n" << RESET_COLOR << *ppf;
 
 		std::cout << GREEN << "\nExecuting form...\n" << RESET_COLOR;
-		b2.executeForm(*rrf);
+		b2.executeForm(*ppf);
 		delete ppf;
 	}
 	catch (std::exception &e)
@@ -54,15 +55,15 @@ int main()
 	std::cout << ANSI_COLOR_BLUE << "\n------Intern creates ShrubberyCreationForm------\n\n" << RESET_COLOR;
 	try
 	{
-		scf = someRandomIntern.makeForm("shrubbery creation", "street");
+		scf = someRandomIntern.makeForm("ShrubberyCreationForm", "street");
 		std::cout << *scf << std::endl;
 
 		std::cout << "Deep Thought signed form: ";
-		b1.signForm(*rrf);
+		b1.signForm(*scf);
 		std::cout << GREEN << "\nForm created:\n" << RESET_COLOR << *scf;
 
 		std::cout << GREEN << "\nExecuting form...\n" << RESET_COLOR;
-		b2.executeForm(*rrf);
+		b2.executeForm(*scf);
 		delete scf;
 	}
 	catch (std::exception &e)
@@ -77,11 +78,11 @@ int main()
 		std::cout << *nvf << std::endl;
 
 		std::cout << "Deep Thought signed form: ";
-		b1.signForm(*rrf);
+		b1.signForm(*nvf);
 		std::cout << GREEN << "\nForm created:\n" << RESET_COLOR << *nvf;
 
 		std::cout << GREEN << "\nExecuting form...\n" << RESET_COLOR;
-		b2.executeForm(*rrf);
+		b2.executeForm(*nvf);
 		delete nvf;
 	}
 	catch (std::exception &e)

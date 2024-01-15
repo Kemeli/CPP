@@ -4,12 +4,32 @@ Form::Form() : _name("default Form"), _signed(false), _gradeToSign(50), _gradeTo
 
 Form::~Form() {}
 
+Form::Form(
+	const std::string& name, int gradeToSign,int gradeToExecute) :
+	_name(name),
+	_signed(false),
+	_gradeToSign(gradeToSign),
+	_gradeToExecute(gradeToExecute)
+{
+	checkGradeRange(_gradeToSign);
+	checkGradeRange(_gradeToExecute);
+}
+
+void Form::checkGradeRange(int grade) {
+	if (grade < 1)
+		throw GradeTooHighException();
+	else if (grade > 150)
+		throw GradeTooLowException();
+}
+
 Form::Form(const Form& obj) :
 	_name(obj._name),
 	_signed(obj._signed),
 	_gradeToSign(obj._gradeToSign),
 	_gradeToExecute(obj._gradeToExecute)
 {
+	checkGradeRange(_gradeToSign);
+	checkGradeRange(_gradeToExecute);
 }
 
 Form& Form::operator= (const Form& obj) {
@@ -21,24 +41,6 @@ Form& Form::operator= (const Form& obj) {
 	const_cast<int&>(_gradeToExecute) = obj._gradeToExecute;
 
 	return *this;
-}
-
-void Form::checkGradeRange(int grade) {
-	if (grade < 1)
-		throw GradeTooHighException();
-	else if (grade > 150)
-		throw GradeTooLowException();
-}
-
-Form::Form(
-	const std::string& name, int gradeToSign,int gradeToExecute) :
-	_name(name),
-	_signed(false),
-	_gradeToSign(gradeToSign),
-	_gradeToExecute(gradeToExecute)
-{
-	checkGradeRange(_gradeToSign);
-	checkGradeRange(_gradeToExecute);
 }
 
 const std::string& Form::getName() const {

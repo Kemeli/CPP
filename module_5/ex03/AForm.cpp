@@ -11,6 +11,8 @@ AForm::AForm(
 	_gradeToSign(gradeToSign),
 	_gradeToExecute(gradeToExecute)
 {
+	checkGradeRange(_gradeToSign);
+	checkGradeRange(_gradeToExecute);
 }
 
 void AForm::checkGradeRange(int grade) {
@@ -26,8 +28,6 @@ AForm::AForm(const AForm& obj) :
 	_gradeToSign(obj._gradeToSign),
 	_gradeToExecute(obj._gradeToExecute)
 {
-	checkGradeRange(_gradeToSign);
-	checkGradeRange(_gradeToExecute);
 }
 
 AForm& AForm::operator= (const AForm& obj) {

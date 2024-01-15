@@ -21,7 +21,10 @@ public:
 	Intern(const Intern& obj);
 	Intern& operator= (const Intern& obj);
 
-	AForm*	makeForm(const std::string& name, const std::string& target);
+	AForm*	makeForm(const std::string form_name, const std::string target);
+	AForm*	makeRobotomyForm(const std::string target);
+	AForm*	makePresidentialForm(const std::string target);
+	AForm*	makeShrubberyForm(const std::string target);
 };
 
 #endif

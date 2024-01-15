@@ -5,6 +5,12 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("default RobotomyRequestForm"
 	this->setTarget("street");
 }
 
+RobotomyRequestForm::RobotomyRequestForm(const std::string target) :
+	AForm("RobotomyRequestForm", 72, 45)
+{
+	this->setTarget(target);
+}
+
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& obj) :
@@ -15,12 +21,6 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 {
 	AForm::operator=(obj);
 	return (*this);
-}
-
-RobotomyRequestForm::RobotomyRequestForm(const std::string target) :
-	AForm("RobotomyRequestForm", 72, 45)
-{
-	this->setTarget(target);
 }
 
 void RobotomyRequestForm::execute(Bureaucrat const & executor) const

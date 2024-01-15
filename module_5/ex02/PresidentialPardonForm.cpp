@@ -5,6 +5,12 @@ PresidentialPardonForm::PresidentialPardonForm() : AForm("default PresidentialPa
 	this->setTarget("park");
 }
 
+PresidentialPardonForm::PresidentialPardonForm(const std::string target) :
+	AForm("PresidentialPardonForm", 25, 5)
+{
+	this->setTarget(target);
+}
+
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& obj) :
@@ -15,12 +21,6 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
 	AForm::operator=(obj);
 	return (*this);
-}
-
-PresidentialPardonForm::PresidentialPardonForm(const std::string target) :
-	AForm("PresidentialPardonForm", 25, 5)
-{
-	this->setTarget(target);
 }
 
 void PresidentialPardonForm::execute(Bureaucrat const & executor) const

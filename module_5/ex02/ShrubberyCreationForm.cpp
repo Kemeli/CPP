@@ -5,6 +5,12 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("default ShrubberyCreatio
 	this->setTarget("home");
 }
 
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) :
+	AForm("ShrubberyCreationForm", 145, 137)
+{
+	this->setTarget(target);
+}
+
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& obj) :
@@ -15,12 +21,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
 	AForm::operator=(obj);
 	return (*this);
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) :
-	AForm("ShrubberyCreationForm", 145, 137)
-{
-	this->setTarget(target);
 }
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const

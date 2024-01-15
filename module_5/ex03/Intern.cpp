@@ -18,13 +18,40 @@ const char * Intern::FormNotFoundException::what() const throw() {
 	return "Form not found";
 }
 
-AForm* Intern::makeForm(const std::string& name, const std::string& target) {
-	if (name == "robotomy request")
-		return new RobotomyRequestForm(target);
-	else if (name == "presidential pardon")
-		return new PresidentialPardonForm(target);
-	else if (name == "shrubbery creation")
-		return new ShrubberyCreationForm(target);
-	else
+AForm *Intern::makeRobotomyForm(const std::string target)
+{
+	return new RobotomyRequestForm(target);
+}
+
+
+AForm *Intern::makePresidentialForm(const std::string target)
+{
+	return new PresidentialPardonForm(target);
+}
+
+AForm *Intern::makeShrubberyForm(const std::string target)
+{
+	return new ShrubberyCreationForm(target);
+}
+
+AForm* Intern::makeForm(std::string form_name, std::string target)
+{
+	if (form_name.compare("PresidentialPardonForm")
+		&& form_name.compare("RobotomyRequestForm")
+		&& form_name.compare("ShrubberyCreationForm"))
+	{
 		throw Intern::FormNotFoundException();
+	}
+
+	AForm *(Intern::*forms[4])(std::string) = {
+		&Intern::makePresidentialForm,
+		NULL,
+		&Intern::makeRobotomyForm,
+		&Intern::makeShrubberyForm,
+	};
+
+	AForm *createdForm = (this->*forms[form_name[0] % 4])(target);
+	std::cout << "Intern creates " << createdForm->getName() << std::endl;
+
+	return createdForm;
 }

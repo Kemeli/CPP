@@ -6,7 +6,7 @@ int main()
 	Bureaucrat b;
 	std::cout << b;
 
-	Bureaucrat b1("Arthur", 1);
+	Bureaucrat b1("Zé", 1);
 	std::cout << PINK << "------Decrement Grade:------" << std::endl << RESET_COLOR;
 	std::cout << b1;
 	try
@@ -44,7 +44,7 @@ int main()
 	}
 	std::cout << b1;
 
-	Bureaucrat b2("Ford", 150);
+	Bureaucrat b2("Zé", 150);
 	std::cout << PINK << "------unsuccessful decrement:------" << std::endl << RESET_COLOR;
 	std::cout << b2;
 	try
@@ -61,7 +61,7 @@ int main()
 	std::cout << PINK << "------Grade too low:------" << std::endl << RESET_COLOR;
 	try
 	{
-		Bureaucrat b3("Zaphod", 151);
+		Bureaucrat b3("Bureaucrat2", 151);
 	}
 	catch (std::exception& e)
 	{
@@ -71,7 +71,7 @@ int main()
 	std::cout << PINK << "------Grade too high:------" << std::endl << RESET_COLOR;
 	try
 	{
-		Bureaucrat b4("Marvin", 0);
+		Bureaucrat b4("Bureaucrat3", 0);
 	}
 	catch (std::exception& e)
 	{

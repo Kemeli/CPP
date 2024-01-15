@@ -5,7 +5,7 @@ int	main(void)
 {
 	std::cout << PINK << "\n---signing is successfull---\n" << RESET_COLOR;
 	try {
-		Bureaucrat	bureaucrat("Arthur", 50);
+		Bureaucrat	bureaucrat("Zé", 50);
 		std::cout << "___Bureaucrat created___\n" << bureaucrat << std::endl;
 
 		Form form("f1", 50, 20);
@@ -22,7 +22,7 @@ int	main(void)
 
 	std::cout << PINK << "\n---signing is unsuccessful---\n" << RESET_COLOR;
 	try {
-		Bureaucrat	bureaucrat("Zaphod", 75);
+		Bureaucrat	bureaucrat("Ana", 75);
 		std::cout << "___Bureaucrat created___\n" << bureaucrat << std::endl;
 
 		Form form("f2", 40, 1);
@@ -39,7 +39,7 @@ int	main(void)
 
 	std::cout << PINK << "\n---form can not be created (Grade Too High)---\n" << RESET_COLOR;
 	try {
-		Bureaucrat bureaucrat("Ford", 10);
+		Bureaucrat bureaucrat("João", 10);
 		std::cout << "___Bureaucrat created___\n" << bureaucrat << std::endl;
 
 		Form form("f3", 0, 1);
@@ -57,7 +57,7 @@ int	main(void)
 
 	std::cout << PINK << "\n---form can not be created (Grade Too Low)---\n" << RESET_COLOR;
 	try {
-		Bureaucrat	bureaucrat("Marvin", 10);
+		Bureaucrat	bureaucrat("Vini", 10);
 		std::cout << "___Bureaucrat created___\n" << bureaucrat << std::endl;
 
 		Form form("f4", 152, 1);

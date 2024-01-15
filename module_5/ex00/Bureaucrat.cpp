@@ -45,7 +45,7 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-	checkGradeRange(grade - 1);//ensure that the new grade after decrementing is within a valid range.
+	checkGradeRange(grade - 1);
 	grade--;
 }
 
