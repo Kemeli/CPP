@@ -11,10 +11,6 @@
 class ScalarConverter
 {
 	public:
-		ScalarConverter();
-		ScalarConverter(ScalarConverter const &other);
-		~ScalarConverter();
-		ScalarConverter &operator=(ScalarConverter const &other);
 
 		static void convert(std::string &input);
 
@@ -28,14 +24,18 @@ class ScalarConverter
 		};
 
 		private:
-			int _type;
-			char _char;
-			int _int;
-			float _float;
-			double _double;
+			ScalarConverter();
+			ScalarConverter(ScalarConverter const &other);
+			~ScalarConverter();
+			ScalarConverter &operator=(ScalarConverter const &other);
 
-
-			// void _set_type(std::string input);
+			static int _set_type(std::string input);
+			static bool _is_allnum(std::string input);
+			static bool _is_decimal_num(std::string input);
+			static void _handle_char(char c);
+			static void _handle_int(std::string input);
+			static void _handle_float(std::string input, int precision);
+			static void _handle_double(std::string input, int precision);
 };
 
 #endif
