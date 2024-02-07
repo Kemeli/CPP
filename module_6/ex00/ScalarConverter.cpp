@@ -16,7 +16,7 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &obj)
 	return (*this);
 }
 
-bool ScalarConverter::_is_allnum(std::string input)
+static bool is_allnum(std::string input)
 {
 	int size = input.size();
 	for (int i = 0; i < size; i++)
@@ -29,7 +29,7 @@ bool ScalarConverter::_is_allnum(std::string input)
 	return true;
 }
 
-bool ScalarConverter::_is_decimal_num(std::string input)
+static bool is_decimal_num(std::string input)
 {
 	int dot = 0;
 	int len = input.length();
@@ -49,7 +49,7 @@ bool ScalarConverter::_is_decimal_num(std::string input)
 	return (1);
 }
 
-void ScalarConverter::_handle_double(std::string input, int precision)
+static void handle_double(std::string input, int precision)
 {
 	double num = atof(input.c_str());
 	std::cout << "char: ";
@@ -61,7 +61,7 @@ void ScalarConverter::_handle_double(std::string input, int precision)
 		std::cout << "'" << static_cast<char>(num) << "'" << std::endl;
 
 	std::cout << "int: ";
-	if (num < INT_MIN || num > INT_MAX || !_is_allnum(input))
+	if (num < INT_MIN || num > INT_MAX || !is_decimal_num(input))
 		std::cout << "impossible" << std::endl;
 	else
 		std::cout << static_cast<int>(num) << std::endl;
@@ -71,9 +71,9 @@ void ScalarConverter::_handle_double(std::string input, int precision)
 	std::cout << "double: " << num << std::endl;
 }
 
-void ScalarConverter::_handle_float(std::string input, int precision)
+static void handle_float(std::string input, int precision)
 {
-	float num = atof(input.c_str());
+	double num = std::strtof(input.c_str(), NULL);
 	std::cout << "char: ";
 	if (num < 0 || num > 127 || !std::isdigit(input[0]))
 		std::cout << "impossible" << std::endl;
@@ -81,20 +81,36 @@ void ScalarConverter::_handle_float(std::string input, int precision)
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << "'" << static_cast<char>(num) << "'" << std::endl;
-	std::cout << "int: ";
-	if (num < INT_MIN || num > INT_MAX)
-		std::cout << "impossible" << std::endl;
+	if (num < INT_MIN || num > INT_MAX  || !is_decimal_num(input))
+		std::cout << "int: " << "impossible" << std::endl;
 	else
-		std::cout << static_cast<int>(num) << std::endl;
+		std::cout << "int: " << static_cast<int>(num) << std::endl;
 
-	std::cout << "float: " << std::fixed << std::setprecision(precision)
-		<< static_cast<float>(num) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(num) << std::endl;
+	if (input == "-inff" || input == "+inff" || input == "nanf")
+	{
+		std::cout << "float: " << std::fixed << std::setprecision(precision)
+			<< num << "f" << std::endl;
+		std::cout << "double: "<< std::fixed << std::setprecision(precision)
+			<< static_cast<double>(num) << std::endl;
+	}
+	else if (num < -FLT_MAX || num > FLT_MAX)
+	{
+		std::cout << "float : impossible\n";
+		std::cout << "double : impossible\n";
+	}
+	else
+	{
+		std::cout << "float: " << std::fixed << std::setprecision(precision)
+			<< num << "f" << std::endl;
+		std::cout << "double: "<< std::fixed << std::setprecision(precision)
+			<< static_cast<double>(num) << std::endl;
+	}
 }
 
-void ScalarConverter::_handle_int(std::string input)
+static void handle_int(std::string input, int precision)
 {
-	int num = atoi(input.c_str());
+	long num = strtol(input.c_str(), NULL, 10);
+	
 	std::cout << "char: ";
 	if (num < 0 || num > 127)
 		std::cout << "impossible" << std::endl;
@@ -103,22 +119,22 @@ void ScalarConverter::_handle_int(std::string input)
 	else
 		std::cout << "'" << static_cast<char>(num) << "'" << std::endl;
 	if (num < INT_MIN || num > INT_MAX)
-		std::cout << "impossible" << std::endl;
-	else
-		std::cout << "int: " << num << std::endl;
-	if (num < FLT_MIN || num > FLT_MAX)
 	{
-		std::cout << "float" << "impossible" << std::endl;
-		std::cout << "double" << "impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: impossible" << std::endl;
+		std::cout << "double: impossible" << std::endl;
 	}
 	else
 	{
-		std::cout << "float: " << static_cast<float>(num) << ".0f" << std::endl;
-		std::cout << "double: " << static_cast<double>(num) << ".0" << std::endl;
+		std::cout << "int: " << num << std::endl;
+		std::cout << "float: " << std::fixed << std::setprecision(precision)
+			<< static_cast<float>(num) << "f" << std::endl;
+		std::cout << "double: " << std::fixed << std::setprecision(precision)
+			<< static_cast<double>(num) << std::endl;
 	}
 }
 
-void ScalarConverter::_handle_char(char c)
+static void handle_char(char c)
 {
 	std::cout << "char: '" << c << "'" << std::endl;
 	std::cout << "int: " << static_cast<int>(c) << std::endl;
@@ -126,18 +142,18 @@ void ScalarConverter::_handle_char(char c)
 	std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
 }
 
-int ScalarConverter::_set_type(std::string input)
+static int set_type(std::string input)
 {
 	int len = input.length();
 	int type = -1;
 
 	if (len == 1 && !std::isdigit(input[0]))
 		type = CHAR;
-	else if (_is_allnum(input))
+	else if (is_allnum(input))
 		type = INT;
-	else if (len > 1 && _is_decimal_num(input) && input[len - 1] == 'f')
+	else if (len > 1 && is_decimal_num(input) && input[len - 1] == 'f')
 		type = FLOAT;
-	else if (len > 1 && _is_decimal_num(input))
+	else if (len > 1 && is_decimal_num(input))
 		type = DOUBLE;
 	else if (input == "-inff" || input == "+inff" || input == "nanf")
 		type = FLOAT;
@@ -150,7 +166,7 @@ int ScalarConverter::_set_type(std::string input)
 
 void ScalarConverter::convert(std::string &input)
 {
-	int type = _set_type(input);
+	int type = set_type(input);
 	size_t pos = input.find('.');
 	int precision = 1;
 
@@ -161,13 +177,13 @@ void ScalarConverter::convert(std::string &input)
 			precision++;
 	}
 	if (type == CHAR)
-		_handle_char(input[0]);
+		handle_char(input[0]);
 	else if (type == INT)
-		_handle_int(input);
+		handle_int(input, precision);
 	else if (type == FLOAT)
-		_handle_float(input, precision);
+		handle_float(input, precision);
 	else if (type == DOUBLE)
-		_handle_double(input, precision);
+		handle_double(input, precision);
 	else if (type == UNKNOWN)
 		std::cout << "Error: Unknown type" << std::endl;
 	else
