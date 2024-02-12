@@ -1,10 +1,11 @@
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = templates
+NAME = containers
 
 all: $(NAME)
 
 OBJECTS = main.o \
+		  Span.o
 
 $(NAME): $(OBJECTS)
 	c++ $(FLAGS) $(OBJECTS) -o $(NAME)
@@ -15,7 +16,7 @@ $(NAME): $(OBJECTS)
 clean:
 	rm -f $(OBJECTS)
 fclean: clean
-	rm -rf templates
+	rm -rf containers
 re: fclean all
 
 .Phony: all clean fclean re

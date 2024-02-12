@@ -1,6 +1,6 @@
 FLAGS = -std=c++98 -Wall -Wextra -Werror
 
-NAME = templates
+NAME = containers
 
 all: $(NAME)
 
@@ -15,7 +15,7 @@ $(NAME): $(OBJECTS)
 clean:
 	rm -f $(OBJECTS)
 fclean: clean
-	rm -rf templates
+	rm -rf containers
 re: fclean all
 
 .Phony: all clean fclean re
