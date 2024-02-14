@@ -28,7 +28,7 @@ int main()
 		--it;
 		while (it != ite)
 		{
-			std::cout << *it << ((*it != *ite) ? ", " : "\n");
+			std::cout << *it << ((it != ite - 1) ? ", " : "\n");
 			++it;
 		}
 		std::stack<int> s(mstack);
