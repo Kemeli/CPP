@@ -27,7 +27,6 @@ class Span
 	int shortestSpan();
 	int longestSpan();
 
-	std::vector<int> getIntegers();
 	unsigned int getIntegersSize();
 	void printIntegers();
 

@@ -34,11 +34,6 @@ void Span::addNumber(int num)
 			);
 }
 
-std::vector<int> Span:: getIntegers()
-{
-	return this->integers;
-}
-
 int Span::shortestSpan()
 {
 
