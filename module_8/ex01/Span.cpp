@@ -43,7 +43,7 @@ int Span::shortestSpan()
 	if (integers.size() < 2)
 	{
 		throw std::runtime_error(
-			"Cannot calculate longest span: vector should have two or more values!"
+			"Cannot calculate shortest span: vector should have two or more values!"
 			);		return (0);
 	}
 	std::sort(integers.begin(), integers.end());
