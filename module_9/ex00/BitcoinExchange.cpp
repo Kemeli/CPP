@@ -50,7 +50,7 @@ void BitcoinExchange::_setDataDict()
 	}
 }
 
-bool checkDateFormat(std::string date)
+bool BitcoinExchange::_checkDateFormat(std::string date)
 {
 	if (date.size() != 10)
 		return false;
@@ -66,7 +66,7 @@ bool checkDateFormat(std::string date)
 	return true;
 }
 
-bool isDate(std::string date)
+bool BitcoinExchange::_isDate(std::string date)
 {
 	int year = std::strtod(date.substr(0, 4).c_str(), NULL);
 	int month = std::strtod(date.substr(5, 2).c_str(), NULL);
@@ -94,7 +94,7 @@ void BitcoinExchange::_output(std::string date, double numericValue)
 	}
 }
 
-bool validValue(double value)
+bool BitcoinExchange::_validValue(double value)
 {
 	if (value < 0)
 	{
@@ -122,6 +122,7 @@ void BitcoinExchange::bitcoinPrices()
 	input.open(_input_file.c_str(), std::ifstream::in);
 	if (input.is_open())
 	{
+		std::getline(input, line);
 		while (std::getline(input, line))
 		{
 			size_t pipe = line.find(" | ");
@@ -129,9 +130,9 @@ void BitcoinExchange::bitcoinPrices()
 			std::string value = line.substr(pipe + 3, line.size() - pipe);
 			double numericValue = std::strtod(value.c_str(), NULL);
 
-			if (!checkDateFormat(date) || !isDate(date))
+			if (!_checkDateFormat(date) || !_isDate(date))
 				std::cout << "Error: bad input => " << date << std::endl;
-			else if (validValue(numericValue))
+			else if (_validValue(numericValue))
 				_output(date, numericValue);
 		}
 		input.close();
@@ -142,4 +143,3 @@ void BitcoinExchange::bitcoinPrices()
 		exit(1);
 	}
 }
-

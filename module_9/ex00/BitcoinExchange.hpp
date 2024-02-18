@@ -7,8 +7,6 @@
 #include <map>
 #include <stdlib.h>
 
-#define MAX_INT 2147483647
-
 class BitcoinExchange
 {
 	public:
@@ -18,15 +16,20 @@ class BitcoinExchange
 
 		BitcoinExchange(std::string input_file);
 
-		void bitcoinPrices();
+		void	bitcoinPrices();
 
 	private:
+		std::map<std::string, double>	_data_dict;
+		std::string						_data_file;
+		std::string						_input_file;
+
 		BitcoinExchange();
-		void _output(std::string date, double numericValue);
-		void _setDataDict();
-		std::map<std::string, double> _data_dict;
-		std::string _data_file;
-		std::string _input_file;
+		void	_output(std::string date, double numericValue);
+		void	_setDataDict();
+		bool	_validValue(double value);
+		bool	_isDate(std::string date);
+		bool	_checkDateFormat(std::string date);
+
 };
 
 #endif
