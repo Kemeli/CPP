@@ -7,25 +7,25 @@
 #include <map>
 #include <stdlib.h>
 
+#define MAX_INT 2147483647
+
 class BitcoinExchange
 {
 	public:
-		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange &other);
 		BitcoinExchange &operator=(const BitcoinExchange &other);
 		~BitcoinExchange();
 
-		BitcoinExchange(std::string filename, std::string input_file);
-		std::map<std::string, double> getDict() const;
+		BitcoinExchange(std::string input_file);
 
 		void bitcoinPrices();
-		void setSourceFileDict();
-		void printValues(std::string date, double value);
 
 	private:
-		std::map<std::string, double> _src_dict;
-		std::map<std::string, double> _input_dict;
-		std::string _src_file;
+		BitcoinExchange();
+		void _output(std::string date, double numericValue);
+		void _setDataDict();
+		std::map<std::string, double> _data_dict;
+		std::string _data_file;
 		std::string _input_file;
 };
 

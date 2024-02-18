@@ -1,41 +1,37 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
-{
-	std::cout << "BitcoinExchange constructor" << std::endl;
-}
+BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
 {
-	std::cout << "BitcoinExchange copy constructor" << std::endl;
-	*this = other;
+	_data_dict = other._data_dict;
+	_data_file = other._data_file;
+	_input_file = other._input_file;
 }
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
-	std::cout << "BitcoinExchange operator=" << std::endl;
-	(void)other;
+	_data_dict = other._data_dict;
+	_data_file = other._data_file;
+	_input_file = other._input_file;
 	return *this;
 }
 
-BitcoinExchange::~BitcoinExchange()
-{
-	std::cout << "BitcoinExchange destructor" << std::endl;
-}
+BitcoinExchange::~BitcoinExchange() {}
 
-BitcoinExchange::BitcoinExchange(std::string src_file, std::string input_file)
+BitcoinExchange::BitcoinExchange(std::string input_file)
 {
-	_src_file = src_file;
+	_data_file = "data.csv";
 	_input_file = input_file;
 }
 
-void BitcoinExchange::setSourceFileDict()
+void BitcoinExchange::_setDataDict()
 {
 	std::ifstream	data;
 	std::string		line;
 	std::string		key;
 
-	data.open(_src_file.c_str(), std::ifstream::in);
+	data.open(_data_file.c_str(), std::ifstream::in);
 	if (data.is_open())
 	{
 		while(std::getline(data, line))
@@ -43,22 +39,85 @@ void BitcoinExchange::setSourceFileDict()
 			size_t		comma = line.find(',');
 			std::string	key = line.substr(0, comma);
 			std::string	value = line.substr(comma + 1, line.size() - comma);
-			_src_dict[key] = std::strtod(value.c_str(), NULL);
+			_data_dict[key] = std::strtod(value.c_str(), NULL);
 		}
 		data.close();
 	}
+	else
+	{
+		std::cout << "Error: could not open data file." << std::endl;
+		exit(1);
+	}
 }
 
+bool checkDateFormat(std::string date)
+{
+	if (date.size() != 10)
+		return false;
+	if (date[4] != '-' || date[7] != '-')
+		return false;
+	for (int i = 0; i < 10; i++)
+	{
+		if (i == 4 || i == 7)
+			continue;
+		if (date[i] < '0' || date[i] > '9')
+			return false;
+	}
+	return true;
+}
+
+bool isDate(std::string date)
+{
+	int year = std::strtod(date.substr(0, 4).c_str(), NULL);
+	int month = std::strtod(date.substr(5, 2).c_str(), NULL);
+	int day = std::strtod(date.substr(8, 2).c_str(), NULL);
+
+	if (year < 2009)
+		return false;
+	if (month < 1 || month > 12)
+		return false;
+	if (day < 1 || day > 31)
+		return false;
+	return true;
+}
+
+void BitcoinExchange::_output(std::string date, double numericValue)
+{
+	std::map<std::string, double>::iterator it = _data_dict.lower_bound(date);
+
+	if (it == _data_dict.begin() || it->first == date)
+		std::cout << date << " => " << numericValue << " = " << it->second * numericValue << std::endl;
+	else
+	{
+		--it;
+		std::cout << date << " => " << numericValue << " = " << it->second * numericValue << std::endl;
+	}
+}
+
+bool validValue(double value)
+{
+	if (value < 0)
+	{
+		std::cout << "Error: not a positive number." << std::endl;
+		return false;
+	}
+	if (value > 1000)
+	{
+		std::cout << "Error: too large a number." << std::endl;
+		return false;
+	}
+	return true;
+}
 
 void BitcoinExchange::bitcoinPrices()
 {
 	std::ifstream input;
 	std::string line;
 
-	setSourceFileDict();
+	_setDataDict();
 
 	std::map<std::string, double>::iterator it;
-	it = _src_dict.begin();
+	it = _data_dict.begin();
 
 	input.open(_input_file.c_str(), std::ifstream::in);
 	if (input.is_open())
@@ -69,30 +128,18 @@ void BitcoinExchange::bitcoinPrices()
 			std::string date = line.substr(0, pipe);
 			std::string value = line.substr(pipe + 3, line.size() - pipe);
 			double numericValue = std::strtod(value.c_str(), NULL);
-			std::map<std::string, double>::iterator it = _src_dict.lower_bound(date);
-			if (it == _src_dict.begin() || it->first == date)
-				std::cout << date << " => " << numericValue << " = " << it->second * numericValue << std::endl;
-			else
-			{
-				--it;
-				std::cout << date << " => " << numericValue << " = " << it->second * numericValue << std::endl;
-			}
 
-
-			// std::cout << date << " => " << numericValue << " = " <<  _src_dict[date] << std::endl;
+			if (!checkDateFormat(date) || !isDate(date))
+				std::cout << "Error: bad input => " << date << std::endl;
+			else if (validValue(numericValue))
+				_output(date, numericValue);
 		}
 		input.close();
 	}
+	else
+	{
+		std::cout << "Error: could not open input file." << std::endl;
+		exit(1);
+	}
 }
 
-// void BitcoinExchange::bitcoinPrices()
-// {
-// 	setSourceFileDict();
-// 	setInputFileDict();
-
-// 	std::map<std::string, double>::iterator it;
-// 	for (it = _input_dict.begin(); it != _input_dict.end(); it++)
-// 	{
-// 		std::cout << it->first << " => " << it->second << " = " << it->second * _src_dict[it->first] << std::endl;
-// 	}
-// }
