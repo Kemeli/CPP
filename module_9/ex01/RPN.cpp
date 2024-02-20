@@ -53,6 +53,11 @@ bool RPN::setStack(std::string token)
 
 bool RPN::_validateInput(std::string input)
 {
+	if (input.size() < 5)
+	{
+		std::cerr << "Error: invalid expression" << std::endl;
+		exit(1);
+	}
 	for (long unsigned int i = 0; i < input.size(); i++)
 	{
 		if (input[i] != ' ' &&
@@ -74,7 +79,7 @@ RPN::RPN(std::string input)
 	if (!_validateInput(input))
 		return ;
 	long unsigned int i = 0;
-	while (i < input.size()) //se isso não funcionar posso usar um try para outofrange
+	while (i < input.size())
 	{
 		std::string token;
 		token = input.substr(i, input.find(' ', i) - i);
@@ -82,7 +87,7 @@ RPN::RPN(std::string input)
 		i = i + token.size() + 1;
 	}
 	if (_stack.size() != 1)
-		std::cerr << "Error: too many values in stack" << std::endl;
+		std::cerr << "Error: invalid expression" << std::endl;
 	else
 	{
 		std::cout << _stack.top() << std::endl;
