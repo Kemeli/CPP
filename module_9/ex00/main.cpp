@@ -7,7 +7,13 @@ int main(int argc, char **argv)
 		std::cout << "Error: pass a valid file as argument" << std::endl;
 		return (1);
 	}
-
-	BitcoinExchange btc(argv[1]);
-	btc.bitcoinPrices();
+	try
+	{
+		BitcoinExchange btc(argv[1]);
+		btc.bitcoinPrices();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }

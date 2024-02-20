@@ -96,6 +96,11 @@ void BitcoinExchange::_output(std::string date, double numericValue)
 
 bool BitcoinExchange::_validValue(double value)
 {
+	if (value == 0)
+	{
+		std::cout << "Error: number should not be '0'." << std::endl;
+		return false;
+	}
 	if (value < 0)
 	{
 		std::cout << "Error: not a positive number." << std::endl;
@@ -126,20 +131,24 @@ void BitcoinExchange::bitcoinPrices()
 		while (std::getline(input, line))
 		{
 			size_t pipe = line.find(" | ");
+			if (pipe == std::string::npos)
+			{
+				std::cout << "Error: bad input => " << line << std::endl;
+				continue ;
+			}
 			std::string date = line.substr(0, pipe);
+			if (!_checkDateFormat(date) || !_isDate(date))
+			{
+				std::cout << "Error: bad input => " << date << std::endl;
+				continue ;
+			}
 			std::string value = line.substr(pipe + 3, line.size() - pipe);
 			double numericValue = std::strtod(value.c_str(), NULL);
-
-			if (!_checkDateFormat(date) || !_isDate(date))
-				std::cout << "Error: bad input => " << date << std::endl;
-			else if (_validValue(numericValue))
+			if (_validValue(numericValue))
 				_output(date, numericValue);
 		}
 		input.close();
 	}
 	else
-	{
 		std::cout << "Error: could not open input file." << std::endl;
-		exit(1);
-	}
 }
